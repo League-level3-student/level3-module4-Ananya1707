@@ -29,8 +29,13 @@ public class _02_TextUndoRedo implements KeyListener {
 	JFrame frame;
 	JPanel panel;
 	JLabel label;
-	Stack<String> text;
+	String text = "";
+	Stack<String> undo;
+	char letter;
 	public static void main(String[] args) {
+		_02_TextUndoRedo t = new _02_TextUndoRedo();
+		t.setup();
+		
 
 		
 	}
@@ -39,29 +44,49 @@ public class _02_TextUndoRedo implements KeyListener {
 		frame = new JFrame();
 		panel = new JPanel();
 		label = new JLabel();
-		text = new Stack<String>();
+        undo = new Stack<String>();
+
 		
+		frame.setVisible(true);
+		frame.addKeyListener(this);
 		frame.add(panel);
-		
 		panel.add(label);
-		panel.addKeyListener(this);
+		label.setHorizontalAlignment(JLabel.LEFT);
+		label.setText(text);
 		
-		//label.setText(text);
-		
+		frame.pack();
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		//text = e.getKeyChar() + text; 
-		//label.setText(text);
-		//frame.pack();
+//		letter = e.getKeyChar();
+//		text = text+letter;
+//
+//		label.setText(text);
+//		frame.pack();
 		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		letter = e.getKeyChar();
+		text = text+letter;
+
+		label.setText(text);
+		frame.pack();
+		if(e.getKeyCode() == e.VK_BACK_SPACE) {
+			undo.push(""+letter);
+			label.setText(text);
+		}
+		else if(e.getKeyCode() == e.VK_LEFT) {
+			label.setText(text+undo.pop());
+		}
+
+		frame.pack();
+		
+
 		
 	}
 
