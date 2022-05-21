@@ -8,25 +8,30 @@ public class TestMatchingBrackets {
      * has a matching closing bracket
      */
     public static boolean doBracketsMatch(String b) {
-		return false;
-//        Stack<String> brackets = new Stack<String>();
-//        for(int i = 0; i<b.length(); i++) {
-//        	brackets.push(b.charAt(i)+"");
-//        }
-//        //System.out.println(brackets);
-//        int pair = 0;
-//        for(int i = 0; i<b.length(); i++) {
-//        	String bracket = brackets.pop();
-//        	if(bracket.equals("{")) {
-//            	//System.out.println(brackets.get(i));
-//        		pair += 1;
-//        	}
-//        	if(bracket.equals("}")) {
-//        		pair -= 1;
-//        	}
-//        }
-        //System.out.println(left);
-        //System.out.println(right);
+        Stack<String> brackets = new Stack<String>();
+        
+        for(int i = 0; i<b.length(); i++) {
+        	if(b.charAt(i) == '{') {
+        		brackets.push(b.charAt(i)+"");
+        	}
+        	if(b.charAt(i) == '}') {
+        		if(brackets.isEmpty() == true) {
+            		return false;
+            	}
+        		else {
+            		brackets.pop();
+        		}
+        	}
+        	
+        }
+        
+        if(brackets.isEmpty() == true) {
+    		return true;
+    	}
+        else {
+        	return false;
+        }
+
 
 
 

@@ -60,33 +60,32 @@ public class _02_TextUndoRedo implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-//		letter = e.getKeyChar();
-//		text = text+letter;
-//
-//		label.setText(text);
-//		frame.pack();
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		letter = e.getKeyChar();
-		text = text+letter;
-
-		label.setText(text);
-		frame.pack();
-		if(e.getKeyCode() == e.VK_BACK_SPACE) {
-			undo.push(""+letter);
-			label.setText(text);
-		}
-		else if(e.getKeyCode() == e.VK_LEFT) {
-			label.setText(text+undo.pop());
-		}
-
-		frame.pack();
 		
 
+		
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			text = text+undo.pop();
+			label.setText(text);
+		} 
+		else if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+			undo.push(text.substring(text.length()-1, text.length()));
+			text = text.substring(0, text.length()-1);
+			label.setText(text);
+		}
+		else {
+			text = text+letter;
+			label.setText(text);
+		}
+		frame.pack();
+		frame.repaint();
+		
 		
 	}
 
