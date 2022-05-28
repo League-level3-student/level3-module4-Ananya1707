@@ -51,33 +51,43 @@ public class _01_IntroToQueue {
         //    Note: you have to use the capitalized Double and not double
         ArrayDeque<Double> queueOfDoubles = new ArrayDeque<Double>();
         
-        while(numbers.isEmpty() != false || queueOfDoubles.isEmpty() != false) {
+        while(numbers.isEmpty() == false || queueOfDoubles.isEmpty() == false) {
 
 
         // 4. Pop off 5 elements from the Stack and add them to the Queue 
-        for(int i = 0; i<=5; i++) {
-        	queueOfDoubles.add(numbers.pop());
-        }
+        	for(int i = 0; i<5; i++) {
+        		if(numbers.isEmpty() == false) {
+            		queueOfDoubles.add(numbers.pop());
+
+        		}
+        	}
+        	
+        	System.out.println(queueOfDoubles);
         
-        System.out.println(numbers);
-        System.out.println(queueOfDoubles);
-
-
-
+        	
         // 5. Print and remove a random number of elements, from 1 to 5 elements,
         //    from the front of the Queue. Example:
         //    "removing 3 elements from Queue: 25 57 2"
-        int randNum = r.nextInt(4);
-        if(randNum == 0) {
-        	randNum = 4;
-        }
+        	int randNum = r.nextInt(5)+1;
+  
+        	
+        	for(int i = 0; i<randNum; i++) {
+        		if(queueOfDoubles.isEmpty() == false) {
+        			queueOfDoubles.remove();
+        		}
+        	}
+        	
+        	System.out.println("removing " + randNum + " elements from Queue: " + queueOfDoubles);
 
         // 6. Pop off as many elements from the stack to fill the Queue with 5
         //    elements. If there aren't enough elements in the Stack to fill the 
         //    queue, fill the queue as much as possible. 
-        for(int i = 0; i<=randNum; i++) {
-        	queueOfDoubles.add(numbers.pop());
-        }
+        	for(int i = 0; i<randNum; i++) {
+        		if(numbers.isEmpty() == false) {
+            		queueOfDoubles.add(numbers.pop());
+        		}
+        	}
+        	System.out.println(queueOfDoubles);
 
         // 7. Loop until there are no more elements in either the Stack or Queue
         //    and all the elements are printed
