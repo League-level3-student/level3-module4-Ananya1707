@@ -2,6 +2,7 @@ package _03_Hangman;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Iterator;
 import java.util.Stack;
 
 import javax.swing.JFrame;
@@ -14,6 +15,11 @@ public class Hangman implements KeyListener {
 	JPanel panel;
 	JLabel label;
 	Stack<String> words = new Stack<String>();
+	int length;
+	String word;
+	String labelText;
+	char[] guess;
+	int lives;
 	
 	public static void main(String[] args) {
 		Hangman t = new Hangman();
@@ -40,10 +46,24 @@ public class Hangman implements KeyListener {
 		frame.add(panel);
 		panel.add(label);
 		
-		String labelText = "";
-		for (int i = 0; i < words.pop().length() ; i++) {
-			labelText = labelText + "_";
+		labelText = "";
+		lives = 5;
+		
+		word = words.pop();
+		System.out.println(word);
+		length = word.length();
+		
+		guess = new char[length];
+		
+		for (int i = 0; i < length ; i++) {
+			guess[i] = '_';
 		}
+		System.out.println(guess);
+		labelText = String.valueOf(guess);
+		
+		label.setText(labelText+ "  Lives:" + lives);
+		
+		
 
 		
 	}
@@ -57,6 +77,28 @@ public class Hangman implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		char letter = e.getKeyChar();
+		boolean hasGuessedLetter = false;
+		int num = 0;
+		
+		for (int i = 0; i < guess.length; i++) {
+			//System.out.println(word.charAt(i));
+			if(word.charAt(i)==letter) {
+				guess[i]=letter;
+				System.out.println(letter);
+				hasGuessedLetter = true;
+			}
+
+			
+		}
+		if(hasGuessedLetter == false) {
+			lives = lives - 1;
+		}
+
+		
+		labelText = String.valueOf(guess);
+		
+		label.setText(labelText+ "  Lives:" + lives);
 		
 	}
 
