@@ -58,12 +58,13 @@ public class Hangman implements KeyListener {
 		for (int i = 0; i < length ; i++) {
 			guess[i] = '_';
 		}
+		
 		System.out.println(guess);
 		labelText = String.valueOf(guess);
 		
 		label.setText(labelText+ "  Lives:" + lives);
 		
-		
+		frame.pack();
 
 		
 	}
@@ -89,7 +90,6 @@ public class Hangman implements KeyListener {
 				hasGuessedLetter = true;
 			}
 
-			
 		}
 		if(hasGuessedLetter == false) {
 			lives = lives - 1;
